@@ -1,0 +1,14 @@
+server.port        = 8080
+server.secret      = 'c3ab8ff13720e8ad9047dd39466b3c8974e592c2fa383d4a3960714caef0c4f2'
+
+[[file]]
+    claim   = 'challenge_28'
+    path    = './28.json'
+
+[[file]]
+    claim   = 'challenge_90'
+    path    = './90.json'
+
+[[file]]
+    claim   = 'challenge_365'
+    path    = './360.json'
