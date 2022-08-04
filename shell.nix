@@ -5,7 +5,8 @@ let
   inherit (nixpkgs) pkgs;
 
   f = { mkDerivation, base, jwt, lib, scotty, tomland, microlens-platform
-      , text, http-types, wai-extra, attoparsec
+      , text, http-types, wai-extra, attoparsec, aeson
+      , containers
       , haskell-language-server
    }:
       mkDerivation {
@@ -15,7 +16,8 @@ let
         isLibrary = false;
         isExecutable = true;
         executableHaskellDepends = [ base jwt scotty tomland microlens-platform 
-            text http-types wai-extra attoparsec
+            text http-types wai-extra attoparsec aeson 
+            containers
             haskell-language-server
          ];
         license = "unknown";

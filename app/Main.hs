@@ -11,6 +11,7 @@ import           Control.Monad.IO.Class (MonadIO(liftIO))
 import           Network.HTTP.Types.Status
 import           Network.Wai.Middleware.RequestLogger
 import           Auth (getClaims)
+import           Access
 
 main :: IO ()
 main = do
@@ -26,7 +27,7 @@ main = do
           get "/another" getAnotherRoute
           get "/:file" $ getContentRoute state
 
--- print $ settings ^? (settingsFiles . _head . claim)
+-- print $ settings ^? (settingsFiles . _head . claim . lazy)
 getContentRoute :: TVar Settings -> ActionM ()
 getContentRoute state = do
   auth <- header "Authorization"
@@ -34,8 +35,7 @@ getContentRoute state = do
   case getClaims (settings ^. settingsSecret) auth of
     Left _  -> status status401
     Right c -> do
-      liftIO $ print c
-      html $ settings ^. (settingsFiles . _head . claim . lazy)
+      json $ grantAccess (settings ^. settingsFiles) c
 
 getAnotherRoute :: ActionM ()
 getAnotherRoute = do
