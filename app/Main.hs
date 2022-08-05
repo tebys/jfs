@@ -21,6 +21,7 @@ main = do
     Left errs -> print $ Toml.prettyTomlDecodeErrors errs
     Right s   -> do
       c <- makeContent $ s ^. settingsFiles
+      print c
       state <- newTVarIO s
       content <- newTVarIO c
       let Port port = s ^. settingsPort

@@ -13,7 +13,7 @@ import           Lens.Micro.Platform
 import           Data.Map.Strict as M
 import           Content (ContentMap)
 
-data Access = Access (Map Text Text)
+data Access = Access (Map Text Value)
   deriving Show
 
 grantAccess :: ContentMap -> JWTClaimsSet -> Access
