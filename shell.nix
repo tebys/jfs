@@ -4,22 +4,22 @@ let
 
   inherit (nixpkgs) pkgs;
 
-  f = { mkDerivation, base, jwt, lib, scotty, tomland, microlens-platform
-      , text, http-types, wai-extra, attoparsec, aeson
-      , containers
+  f = { mkDerivation, aeson, attoparsec, base, containers
+      , http-types, jwt, lib, microlens-platform, scotty, text, tomland
+      , wai-extra
       , haskell-language-server
-   }:
+      }:
       mkDerivation {
         pname = "jfs";
         version = "0.1.0.0";
         src = ./.;
         isLibrary = false;
         isExecutable = true;
-        executableHaskellDepends = [ base jwt scotty tomland microlens-platform 
-            text http-types wai-extra attoparsec aeson 
-            containers
-            haskell-language-server
-         ];
+        executableHaskellDepends = [
+          aeson attoparsec base containers http-types jwt microlens-platform
+          scotty text tomland wai-extra
+          haskell-language-server
+        ];
         license = "unknown";
         mainProgram = "jfs";
       };
